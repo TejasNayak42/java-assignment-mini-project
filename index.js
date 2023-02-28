@@ -1,28 +1,24 @@
-const path = require("path");
+var http = require("http");
+var fs = require("fs");
 
-const express = require("express");
+http
+  .createServer(function (req, res) {
+    let route = req.url.replace("/", "");
 
-const app = express();
-const staticPath = path.join(__dirname, "../public");
+    let request_url = route === "" || route === "/" ? "index.html" : route;
 
-app.use(express.static(staticPath));
+    fs.exists(request_url, (exist) => {
+      if (Boolean(exist) === false) {
+        res.writeHead(404, { "content-type": "text/html" });
+        res.end("Page Not Found");
+        return null;
+      }
 
-app.get("/file", function (req, res) {
-  res.send("Hello World!");
-});
-
-app.get("/user", function (req, res) {
-  res.send("Hello World from user");
-});
-
-app.get("/about", function (req, res) {
-  res.sendFile(__dirname + "/about.html");
-});
-
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/public/index.html");
-});
-
-app.listen(3000, function () {
-  console.log("Server is up and running...");
-});
+      fs.readFile(request_url, function (err, data) {
+        res.writeHead(200);
+        res.write(data);
+        res.end();
+      });
+    });
+  })
+  .listen(3000);

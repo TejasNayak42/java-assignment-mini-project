@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Details</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <!-- show here -->
+    <section id="recommendations">
+      <div style="clear: both"></div>
+      <div id="board"></div>
+    </section>
+
+    <section id="contact">
+      <div class="flex_center">
+        <fieldset>
+          <legend class="introduction">Enter Details</legend>
+          <textarea
+            id="namebox"
+            cols="500"
+            rows="1"
+            placeholder="Name"
+          ></textarea>
+          <textarea
+            id="usnbox"
+            cols="500"
+            rows="1"
+            placeholder="USN"
+          ></textarea>
+          <textarea
+            id="marksbox"
+            cols="500"
+            rows="1"
+            placeholder="Marks"
+          ></textarea>
+          <div class="flex_center">
+            <button id="enter" onclick="adddata()">Submit</button>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <div class="popup" id="popup" class="flex_center">
+      <button onclick="showPopup(false)">Ok</button>
+    </div>
+  </body>
+</html>
